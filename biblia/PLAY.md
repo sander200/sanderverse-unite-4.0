@@ -1,46 +1,23 @@
-# Play Store — AAB, tamaño y sala de 3
+# Play Store — AAB, no solo APK
 
-El APK instala a mano. La ficha nueva de Google Play solo sube un Android App Bundle (.aab).
+La ficha nueva de Google Play no acepta un APK como paquete de subida. El archivo es un Android App Bundle (.aab). El APK sirve para instalar a mano en un teléfono. El AAB es el que entra en la consola.
 
-## Crear el AAB
-En el proyecto Android:
+## Cuando se pague la consola
+1. Crear la app en Play Console. El applicationId queda fijo para siempre. No cambiarlo después.
+2. Activar Play App Signing. El keystore de subida se guarda fuera del repositorio.
+3. Subir el AAB a una prueba cerrada, no a producción, el primer mes.
+4. Completar ficha, clasificación de contenido y política de privacidad. El juego guarda historial y mejor puntuación en el almacenamiento privado del aparato.
+
+## Cómo sale el AAB
+En el proyecto Android, no en esta biblia:
 
     ./gradlew bundleRelease
 
-Sale en `app/build/outputs/bundle/release/app-release.aab`.
+El archivo queda en app/build/outputs/bundle/release/. versionCode sube de uno en uno. versionName puede ser 0.1.0 en la prueba cerrada.
 
-Antes, en el módulo app:
+No hace falta pedir permiso global de disco. El save ya va al sandbox de la app.
 
-- `minifyEnabled true` y `shrinkResources true` en release. R8 quita código y recursos que nadie llama.
-- `ndk.abiFilters` solo `arm64-v8a`. Una ficha nueva ya no necesita 32 bits. No metas x86.
-- `resConfigs` de "pt", "es", "en". El AAB parte por idioma, densidad y ABI. No desactives esos splits.
-- `versionCode` sube de uno en uno. `versionName` de la prueba cerrada: 0.1.0.
-- `applicationId` se elige una vez y no se cambia.
-- Firma con una upload key. Activa Play App Signing en la consola. El keystore no entra al repositorio.
-- `targetSdk` es el que la consola exija ese mes. No subas con uno viejo.
-- Release no lleva `debuggable`.
-
-Medir antes de subir:
-
-    java -jar bundletool.jar build-apks --bundle=app-release.aab --output=out.apks --mode=universal
-    java -jar bundletool.jar get-size total --apks=out.apks
-
-El módulo base, ya comprimido, tiene que quedar bajo 200 MB. Los vídeos de `plantel/move` y `plantel/attack` no van dentro del base: van en un asset pack de Play Asset Delivery, fast-follow, y el juego arranca sin ellos.
-
-## Sala online de 3
-Solo y Con 2 bots siguen sin red. Si el revisor no puede terminar una partida solo, la ficha se rechaza.
-
-Aliados es otra puerta:
-
-- Tres sitios. El anfitrión ocupa uno.
-- Dos códigos de un solo uso, válidos solo en esa sala.
-- La partida online no empieza hasta que los dos invitados entran.
-- Los tres usan el mismo `match_id`. El clima sale de esa semilla, sin mandar el evento por la red.
-- El anfitrión es la autoridad de los 10:00. Al cerrar, cada aparato guarda su historial en el sandbox.
-- Sin chat en esta versión. Un código no es contenido de usuario. Si más adelante hay texto libre, hace falta denuncia y bloqueo.
-- Edad objetivo 16+. Una ficha para niños no puede abrir salas por invitación.
-- Permiso `INTERNET`. No pedir permiso de disco.
-- Política de privacidad con URL pública: se envía IP y estado de la partida mientras la sala está abierta. El historial se queda en el aparato.
-- En el formulario de seguridad de datos, declarar eso y nada más.
-
-La prueba cerrada tiene que incluir una sala real de dos invitados, no solo bots.
+## Golpes de referencia
+Cada personaje tiene un ataque de 6 segundos en plantel/attack/.
+Sander golpe, Polo tajo, Lupe arco, Topete filo, Cristian estocada, Babalu disparo, Omega zarpazo.
+No regenerar el modelo. Usar ese clip como el golpe.
