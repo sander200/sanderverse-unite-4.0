@@ -36,10 +36,18 @@ Al cumplirla, el portador recibe 2 fragmentos para depositar. No se suman puntos
 Caduca a los 90 s y sale otra.
 
 ## Clima
-A los 3:00, tormenta en el lateral oeste: marcha ×0,9 y visión corta.
-A los 6:00, neblina en el foso: corta visión, no bloquea.
-A los 9:00, crecida en el lateral este durante 45 s. Ese carril se cierra.
-El mid nunca se inunda.
+No es un guion fijo. Cada partida tira su propia semilla.
+A los 3:00, 6:00 y 9:00 se elige un evento (tormenta, neblina o crecida) y una zona (oeste, este o foso).
+La zona no se repite en la tirada siguiente.
+Tormenta: marcha ×0,9 y visión corta.
+Neblina: corta visión, no bloquea el paso.
+Crecida: cierra ese lateral 45 s. Si la zona salió foso, la crecida pasa al lateral que no se usó. El mid nunca se cierra.
+Dos partidas seguidas no salen iguales.
+
+## Almacenamiento
+La primera vez que termina una partida, pide permiso de almacenamiento y explica que es para guardar el historial y la mejor puntuación en ese aparato.
+Si acepta, guarda en el almacenamiento privado de la app: fecha, modo (solo o 2 bots), depósito, derrotas, duración y resultado. La mejor puntuación es el depósito más alto.
+Si niega, la partida se juega igual y no se archiva nada. No vuelvas a pedir el permiso en la misma sesión.
 
 ## Neutrales
 Los monstruos de campo pueden usar piezas CC0 de Kenney, carpeta Sci-fi (https://kenney.nl/assets).
