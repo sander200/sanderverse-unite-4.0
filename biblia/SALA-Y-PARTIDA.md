@@ -36,18 +36,32 @@ Al cumplirla, el portador recibe 2 fragmentos para depositar. No se suman puntos
 Caduca a los 90 s y sale otra.
 
 ## Clima
-No es un guion fijo. Cada partida tira su propia semilla.
-A los 3:00, 6:00 y 9:00 se elige un evento (tormenta, neblina o crecida) y una zona (oeste, este o foso).
-La zona no se repite en la tirada siguiente.
-Tormenta: marcha ×0,9 y visión corta.
-Neblina: corta visión, no bloquea el paso.
-Crecida: cierra ese lateral 45 s. Si la zona salió foso, la crecida pasa al lateral que no se usó. El mid nunca se cierra.
-Dos partidas seguidas no salen iguales.
+La semilla es el match_id. No se manda el clima por la red: cada cliente tira el mismo cronograma.
+A los 3:00, 6:00 y 9:00 sale uno de: sol, lluvia pesada, niebla de guerra, tempestad de arena.
+No se repite el evento de la tirada anterior.
+Sol: sin modificador.
+Lluvia pesada: marcha ×0,9 y visión corta.
+Niebla de guerra: corta visión, no bloquea.
+Tempestad de arena: marcha ×0,85 y visión corta.
+Ninguno cierra el mid. Dos match_id distintos no salen iguales.
 
 ## Almacenamiento
-La primera vez que termina una partida, pide permiso de almacenamiento y explica que es para guardar el historial y la mejor puntuación en ese aparato.
-Si acepta, guarda en el almacenamiento privado de la app: fecha, modo (solo o 2 bots), depósito, derrotas, duración y resultado. La mejor puntuación es el depósito más alto.
-Si niega, la partida se juega igual y no se archiva nada. No vuelvas a pedir el permiso en la misma sesión.
+Guardar en el sandbox privado de la app. No pedir permiso global de disco.
+Android: el equivalente a /data/user/0/[paquete]/files.
+iOS: Library/Application Support. No usar Documents, porque iCloud lo respalda y la App Store puede rechazar la app.
+Al desinstalar, se borra.
+Se guarda fecha, modo (solo o 2 bots), depósito, derrotas, duración y resultado. La mejor puntuación es el depósito más alto.
+También se guardan ahí el volumen y el match_id de la última sala.
+
+## Sander, vista por yaw
+El plano es +X este, +Z norte. La cámara mira desde el sur.
+Yaw del stick, 0° = este, 90° = norte.
+- 45° a 135°: espalda (se aleja).
+- 135° a 225°: perfil, volteo horizontal (oeste).
+- 225° a 315°: frente (viene hacia la cámara).
+- el resto: perfil, sin volteo (este).
+Quieto, se conserva el último yaw. No volver al perfil por defecto.
+No estirar un cuadro. Un hueco transparente dentro del cuerpo es un fallo.
 
 ## Neutrales
 Los monstruos de campo pueden usar piezas CC0 de Kenney, carpeta Sci-fi (https://kenney.nl/assets).
